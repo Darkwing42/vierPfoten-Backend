@@ -1,23 +1,31 @@
 import datetime
 from mongoengine import *
-animal_type = (
-    "hund",
-    "katze",
-    "kleintier"
-)
 
-class Animal(EmbeddedDocument):
+ANREDE = [
+    "Herr",
+    "Frau"
+]
+
+class Tiere(EmbeddedDocument):
     name = StringField(max_lenght=200, required=True)
-    animal_type = StringField(max_lenght=10, choices=animal_type)
+    tierart = StringField(max_lenght=200, required=True)
+    rasse = StringField(max_lenght=200, required=True)
+    medHistory = ListField()
+    besonderheiten = ListField()
 
     created_at = DateTimeField(default=datetime.datetime.now)
     modified_at = DateTimeField(default=datetime.datetime.now)
 
-class Customer(Document):
-    last_name = StringField(max_lenght=200, required=True)
-    first_name = StringField(max_lenght=200)
+class Kunde(Document):
+    kundennummer = IntField(required=True)
+    titel = StringField(max_lenght=200)
+    anrede = StringField(max_length=4, choices=ANREDE)
+    nachname = StringField(max_lenght=200, required=True)
+    vorname = StringField(max_lenght=200)
     email = EmailField()
-    animals = ListField(EmbeddedDocumentField(Animal))
-    
+    besonderheiten = StringField(max_length=200)
+    tiere = ListField(EmbeddedDocumentField(Tiere))
+    rabatt = IntField()
+
     created_at = DateTimeField(default=datetime.datetime.now)
     modified_at = DateTimeField(default=datetime.datetime.now)

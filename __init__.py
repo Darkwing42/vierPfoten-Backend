@@ -5,7 +5,7 @@ from flask_cors import CORS
 from mongoengine import *
 
 
-from vierPfoten.security import authenticate, identity
+from Backend.security import authenticate, identity
 
 app = Flask(__name__)
 api = Api(app)
@@ -37,9 +37,13 @@ connect(
 
 
 #resource import
-from vierPfoten.resources.admin import Users
+from Backend.resources.admin import Users
+from Backend.resources.kunden import KundenListe
+from Backend.resources.kunden import Kunde
 
 
 url_prefix = "/api/v1"
 
 api.add_resource(Users, url_prefix + '/admin')
+api.add_resource(KundenListe, url_prefix + '/kunden')
+api.add_resource(Kunde, url_prefix + '/kunde', url_prefix + '/kunde/update/<int:kundennummer>')

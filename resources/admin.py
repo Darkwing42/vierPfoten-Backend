@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import request
 from flask_jwt import jwt_required
-from vierPfoten.models.users import User
+from Backend.models.users import User
 import uuid
 
 class Users(Resource):

@@ -1,5 +1,5 @@
 from werkzeug.security import check_password_hash
-from vierPfoten.models.users import User
+from Backend.models.users import User
 
 def authenticate(username, password):
     user = User.objects(username=username).first()
